@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  app:
+    image: application-image
+    networks:
+      - fooddelivery_cloud
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - "SPRING_DATASOURCE_USERNAME=postgres"
+      - "SPRING_DATASOURCE_PASSWORD=qwerty009"
+      - "DB_HOST=db"
+      - "DB_PORT=5432"
+
+  db:
+    image: postgres
+    networks:
+      - fooddelivery_cloud
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=qwerty009
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=FoodDelivery
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+
+volumes:
+  postgres_volume:
+    external: true
+
+networks:
+  fooddelivery_cloud:
+    driver: bridge

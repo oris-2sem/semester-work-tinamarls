@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новая позиция</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/adminNavbar :: content"></div>
+
+<section class="change-product">
+    <form method="post" th:action="@{/admin/product/add}" th:object="${requestProductForm}" id="addProductForm"
+          enctype="multipart/form-data">
+        <h2>Добавляем новую позицию в меню</h2>
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="nameOfProduct" size="40" placeholder="Название позиции" id="nameOfProduct"
+                       th:value="${requestProductForm.nameOfProduct}">
+            </label>
+            <span th:if="${#fields.hasErrors('nameOfProduct')}" th:errors="*{nameOfProduct}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="category" size="40" placeholder="Категория" id="category"
+                       th:value="${requestProductForm.category}">
+            </label>
+            <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="price" size="40" placeholder="Цена" id="price"
+                       th:value="${requestProductForm.price}">
+            </label>
+            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input class="description" type="text" name="description" size="80" placeholder="Описание"
+                       id="description" th:value="${requestProductForm.description}">
+            </label>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input class="calories" type="text" name="calories" size="80" placeholder="Калорийность" id="calories"
+                       th:value="${requestProductForm.calories}">
+            </label>
+            <span th:if="${#fields.hasErrors('calories')}" th:errors="*{calories}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="file" name="photo" id="photo">
+            </label>
+            <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <button type="submit">Добавить продукт</button>
+
+    </form>
+
+</section>
+
+</body>
+
+</html>

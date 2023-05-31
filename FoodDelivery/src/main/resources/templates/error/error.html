@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибочка</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/error.css}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/userNavbar :: content"></div>
+
+<section class="index">
+    <h1>Упс...</h1>
+</section>
+
+<div class="error-img">
+    <img th:src="@{/images/error.jpg}" alt="" src="">
+</div>
+
+<section class="error-content">
+    <h2 th:text="${errorMessage}"></h2>
+    <h3 th:text="${elseMessage}"></h3>
+</section>
+
+</body>
+
+</html>

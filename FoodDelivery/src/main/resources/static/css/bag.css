@@ -1,0 +1,255 @@
+.cart {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-family: 'Dosis', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(.43,1.1,.62,1.08);
+    text-transform: none;
+}
+
+.cart h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.cart table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart th,
+.cart td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.cart th {
+    background-color: #f0f0f0;
+}
+
+.cart img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.cart .cart-total {
+    margin-top: 20px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.cart .buttons {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.cart .buttons button {
+    margin-left: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #daaf9d;
+    color: #fff;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #d3ada6;
+}
+
+.cart-container .cart-total span{
+    font-size: 2.5rem;
+}
+
+.cart-container .cart-total span total-price {
+    color: #cc9a89;
+}
+
+.cart-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table td, table th {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+table tr:not(:first-child) td {
+    border-top: none;
+}
+
+.cart-container .cart-table td img{
+    height: 12rem;
+    width: 12rem;
+}
+
+.cart-container .cart-table td button.btn-plus{
+    height: 5rem;
+    width: 5rem;
+    font-size: 3rem;
+    color: #212328;
+    background: #f8f8f8;
+}
+
+.cart-container .cart-table td button.btn-minus{
+    height: 5rem;
+    width: 5rem;
+    font-size: 3rem;
+    color: #100101;
+    background: #f8f8f8;
+}
+
+.cart-container .cart-table td button.btn-delete img{
+    height: 2rem;
+    width: 2rem;
+}
+
+.inform {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.switch-bonus {
+    display: flex;
+    align-items: center;
+}
+
+.switch-bonus label {
+    margin-left: 5px;
+    width: 50px;
+    height: 25px;
+    background: grey;
+    display: block;
+    border-radius: 50px;
+    position: relative;
+}
+
+.switch-bonus label:after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 24px;
+    transition: 0.3s;
+}
+
+.switch-bonus input:checked + label {
+    background: #e17b72;
+}
+
+.switch-bonus input:checked + label:after {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+}
+
+.switch-bonus label:active:after {
+    width: 65px;
+}
+
+.select-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 12px 40px 12px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    border: none;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.select-wrapper:after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    pointer-events: none;
+}
+
+/* Опциональные стили для активного состояния */
+.select-wrapper select:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Стили при наведении */
+.select-wrapper:hover {
+    border-color: #888;
+}
+
+.select-wrapper:hover select {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/*.select-wrapper {*/
+/*    display: inline-block;*/
+/*    position: relative;*/
+/*}*/
+
+/*.select-wrapper select {*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    appearance: none;*/
+/*    padding: 10px;*/
+/*    font-size: 14px;*/
+/*    width: 200px;*/
+/*    border: 1px solid #ccc;*/
+/*    background-color: #fff;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.select-wrapper:after {*/
+/*    content: '\25BC';*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 10px;*/
+/*    transform: translateY(-50%);*/
+/*    pointer-events: none;*/
+/*}*/
+
+/*!* Опциональные стили для активного состояния *!*/
+/*.select-wrapper select:focus {*/
+/*    outline: none;*/
+/*    border-color: #888;*/
+/*    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);*/
+/*}*/
+
+/*.cart-container .cart .clearfix:after {*/
+/*    content: " ";*/
+/*    display: block;*/
+/*    clear: both;*/
+/*}*/
+

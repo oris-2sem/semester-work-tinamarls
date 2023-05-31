@@ -1,0 +1,36 @@
+.index {
+    text-align: center;
+}
+
+.index .h1{
+    font-size: 7rem;
+    color: #000000;
+    text-align: center;
+}
+
+.error-img{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.error-img img{
+    height: 36rem;
+    width: 36rem
+}
+
+.error-content {
+    text-align: center;
+}
+
+.error-content .h2{
+    font-size: 6rem;
+    color: #151515;
+    text-align: center;
+}
+
+.error-content .h3{
+    font-size: 6rem;
+    color: #151515;
+    text-align: center;
+}

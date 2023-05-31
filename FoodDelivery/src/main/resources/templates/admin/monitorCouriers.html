@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Курьеры</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/adminNavbar :: content"></div>
+
+<section class="admin-product">
+    <h1 th:if="${successMessage}"><span th:text="${successMessage}"></span></h1>
+</section>
+
+<section class="change-product">
+    <form method="post" th:action="@{/admin/courier}" th:object="${requestCourierForm}">
+        <h2>Добавляем нового курьера в базу</h2>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="email" name="login" size="40" placeholder="Почта" id="login"
+                       th:value="${requestCourierForm.login}">
+            </label>
+            <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="password" name="password" size="40" placeholder="Пароль" id="password"
+                       th:value="${requestCourierForm.password}">
+            </label>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="nameOfCourier" size="40" placeholder="Имя курьера" id="nameOfCourier"
+                       th:value="${requestCourierForm.nameOfCourier}">
+            </label>
+            <span th:if="${#fields.hasErrors('nameOfCourier')}" th:errors="*{nameOfCourier}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input class="numberOfPhone" type="text" name="numberOfPhone" size="40" placeholder="Номер телефона"
+                       id="numberOfPhone" th:value="${requestCourierForm.numberOfPhone}">
+            </label>
+            <span th:if="${#fields.hasErrors('numberOfPhone')}" th:errors="*{numberOfPhone}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <button type="submit">Зарегестрировать курьера</button>
+
+    </form>
+
+</section>
+
+
+</body>
+
+</html>

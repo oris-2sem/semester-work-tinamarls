@@ -1,0 +1,66 @@
+<section class="header" th:fragment="content" xmlns:th="http://www.w3.org/1999/html">
+
+    <section class="header">
+
+
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img th:src="@{/images/dodo.jpg}" alt="" src="">
+            </a>
+            <a href="/#about">О нас</a>
+            <a href="/#pizza">Пицца</a>
+            <a href="/#snacks">Закуски</a>
+            <a href="/#drinks">Напитки</a>
+            <a href="/#desert">Десерты</a>
+            <a href="/feedback">Обратная связь</a>
+            <a> </a><a> </a><a> </a><a> </a><a> </a>
+
+            <a href="/bag">
+                <img th:src="@{/images/bag.jpg}" alt="" height="27" width="27" src="">
+            </a>
+
+            <a href="/bag">
+                <span>
+                    <div id="cartItemCount" class="item-count"></div>
+                </span>
+            </a>
+
+            <th:block th:if="${#authentication.authorities.?[authority != 'ROLE_ANONYMOUS'].size() > 0}">
+
+                <div th:if="${#authentication.authorities.?[authority == 'ADMIN'].size() > 0}">
+                    <a href="/admin">
+                        <img th:src="@{/images/profile.jpg}" alt="" height="27" width="27" src="">
+                    </a>
+                </div>
+
+                <div th:if="${#authentication.authorities.?[authority == 'CLIENT'].size() > 0}">
+                    <a href="/profile">
+                        <img th:src="@{/images/profile.jpg}" alt="" height="27" width="27" src="">
+                    </a>
+                </div>
+
+                <div th:if="${#authentication.authorities.?[authority == 'COURIER'].size() > 0}">
+                    <a href="/courier">
+                        <img th:src="@{/images/profile.jpg}" alt="" height="27" width="27" src="">
+                    </a>
+                </div>
+
+                <a href="/logout">
+                    <img th:src="@{/images/end.jpg}" alt="" height="27" width="27" src="">
+                </a>
+            </th:block>
+
+            <th:block th:if="${#authentication.authorities.?[authority == 'ROLE_ANONYMOUS'].size() > 0}">
+                <a href="/login">
+                    <img th:src="@{/images/login.jpg}" alt="" height="27" width="27" src="">
+                </a>
+            </th:block>
+
+        </nav>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+    </section>
+
+
+</section>

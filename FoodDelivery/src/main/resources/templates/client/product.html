@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мониторинг заказов</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/userNavbar :: content"></div>
+
+<section class="change-product">
+
+    <h1><span th:text="${product.nameOfProduct}"></span></h1>
+
+    <div class="product-info">
+        <img th:src="@{/file/__${product.photoName}__}" alt="" class="product-image" src="">
+        <div class="product-details">
+            <p><strong class="product-label">Цена: </strong>
+                <span th:text="${product.price}"></span></p>
+            <p><strong class="product-label">Категория: </strong>
+                <span th:text="${product.category}"></span></p>
+            <p><strong class="product-label">Калорийность: </strong><span th:text="${product.calories}"></span></p>
+            <p><strong class="product-label">Описание: </strong><span th:text="${product.description}"></span></p>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+</section>
+
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

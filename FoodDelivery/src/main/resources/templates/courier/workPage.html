@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Рабочая страница</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="include" th:include="/fragments/courierNavbar :: content"></div>
+
+<div th:if="${!working}">
+    <section class="admin-product">
+        <form th:action="@{/courier/change-state}" method="post">
+        <button type="submit" class="admin-product" name="work" th:value="WORKED">Начать смену</button>
+        </form>
+    </section>
+</div>
+
+<div th:if="${working}">
+    <section class="admin-product">
+        <div>
+            <form th:action="@{/courier/change-state}" method="post">
+                <button type="submit" name="work" th:value="RELAX">Завершить смену</button>
+            </form>
+        </div>
+
+        <p></p>
+
+        <h1 th:if="${canNotEnd}"><span th:text="${canNotEnd}"></span></h1>
+
+        <p></p>
+        <h2> Текущие заказы</h2>
+        <div class="tables">
+            <table>
+                <tr>
+                    <th>Адрес</th>
+                    <th>Информация о получателе</th>
+                    <th>Комментарий</th>
+                    <th>Продукты</th>
+                    <th></th>
+                </tr>
+
+                <tr th:each="order : ${allOrders}">
+                    <td><span th:text="${order.address}"></span></td>
+                    <td><span th:text="${order.nameOfClient + ', ' + order.phoneNumber}"></span></td>
+                    <td><span th:text="${order.fullPrice}"></span></td>
+                    <td><span th:text="${order.commentary}"></span></td>
+
+                    <td>
+                        <form th:action="@{/courier/done-order}" method="post">
+                        <button type="submit" name="orderId" th:value="${order.id}">Done</button>
+                        </form>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </section>
+</div>
+
+</body>
+</html>

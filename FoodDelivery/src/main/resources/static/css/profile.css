@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    font-family: 'Dosis', sans-serif;
+}
+
+.navigation {
+    width: 200px;
+    position: fixed;
+}
+
+.navigation a{
+    width: 200px;
+    font-size: 2rem;
+    margin-left: 2rem;
+    color:var(--light-black);
+}
+
+.content {
+    flex: 1;
+    margin-left: 28rem;
+    font-size: 1.5rem;
+}
+
+.order {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-family: 'Dosis', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(.43,1.1,.62,1.08);
+    text-transform: none;
+}
+
+.order h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.order table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order th,
+.order td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.order th {
+    background-color: #f0f0f0;
+}
+
+.order img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.current {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table td, table th {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+table tr:not(:first-child) td {
+    border-top: none;
+}
+

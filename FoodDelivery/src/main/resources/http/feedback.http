@@ -1,0 +1,18 @@
+###
+GET http://localhost/feedback/all
+
+###
+POST http://localhost/feedback
+Content-Type: application/json
+X-CSRF-TOKEN: 21bfb641-e40e-4262-aa3f-b391c65d4b8a
+
+{
+  "stars": "4",
+  "commentary": "холодная еда"
+}
+
+###
+GET http://localhost/feedback/1
+
+###
+DELETE http://localhost/feedback/1

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мониторинг заказов</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/userNavbar :: content"></div>
+
+<section class="admin-product">
+    <h1>Итоговая сумма к оплате: <span th:text="${requestOrderForm.totalPrice}"></span></h1>
+</section>
+
+<section class="change-product">
+    <form method="post" th:action="@{/order}" th:object="${requestOrderForm}">
+        <h2>Оформление заказа</h2>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="nameOfClient" size="70" placeholder="Имя получателя" id="nameOfClient"
+                       th:value="${requestOrderForm.nameOfClient}">
+            </label>
+            <span th:if="${#fields.hasErrors('nameOfClient')}" th:errors="*{nameOfClient}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="phoneNumber" size="70" placeholder="Телефон получателя" id="phoneNumber"
+                       th:value="${requestOrderForm.phoneNumber}">
+            </label>
+            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="address" size="70" placeholder="Адрес доставки" id="address"
+                       th:value="${requestOrderForm.address}">
+            </label>
+            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+                  style="margin-left: 10px; font-size: 15px"></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div style="display: flex; align-items: center;">
+            <label>
+                <input type="text" name="commentary" size="70" placeholder="Комментарий к заказу" id="commentary"
+                       th:value="${requestOrderForm.commentary}">
+            </label>
+        </div>
+
+        <input type="hidden" name="useBonuses" th:value="${requestOrderForm.useBonuses}"/>
+        <input type="hidden" name="totalPrice" th:value="${requestOrderForm.totalPrice}"/>
+
+        <button type="submit">Оформить</button>
+
+    </form>
+
+</section>
+
+<script src="/js/main.js"></script>
+
+
+</body>
+
+</html>

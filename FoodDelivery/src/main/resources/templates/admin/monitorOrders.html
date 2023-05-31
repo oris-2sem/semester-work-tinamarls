@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мониторинг заказов</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/adminNavbar :: content"></div>
+
+<section class="admin-product">
+    <h1> Текущие заказы</h1>
+    <div class="tables">
+        <table>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Адрес</th>
+                <th>Информация о получателе</th>
+                <th>Продукты</th>
+                <th>Стоимость заказа</th>
+                <th>Статус заказа</th>
+                <th>Курьер</th>
+            </tr>
+
+            <tr th:each="order : ${allOrders}">
+                <td><span th:text="${order.key.id}"></span></td>
+                <td><span th:text="${order.key.address}"></span></td>
+                <td><span th:text="${order.key.nameOfClient + ', ' + order.key.phoneNumber}"></span></td>
+                <td>
+                    <ul>
+                        <li th:each="entity : ${order.value}"
+                            th:text="${entity.product.nameOfProduct + ' x ' + entity.count}"></li>
+                    </ul>
+                </td>
+
+                <td><span th:text="${order.key.fullPrice}"></span></td>
+
+                <td>
+                    <p th:if="${order.key.state.name() == 'ACCEPTED'}">Принято</p>
+                    <p th:if="${order.key.state.name() == 'COOKING'}">Готовится</p>
+                    <p th:if="${order.key.state.name() == 'IN_SEARCH_COURIER'}">В поиске курьера</p>
+                    <p th:if="${order.key.state.name() == 'IN_DELIVERY'}">В доставке</p>
+
+                    <button class="more">...</button>
+                    <div class="form" style="display: none">
+                        <form class="myForm" th:action="@{/admin/change-state}" method="post">
+                            <input type="hidden" name="_method" value="PUT"/>
+                            <label for="selectStatus"></label>
+                            <select id="selectStatus" name="selectStatus">
+                                <option th:value="ACCEPTED">Принято</option>
+                                <option th:value="COOKING">Готовится</option>
+                                <option th:value="IN_SEARCH_COURIER">В поиске курьера</option>
+                                <option th:value="IN_DELIVERY">В доставке</option>
+                            </select>
+
+                            <button class="sendForm" type="submit" th:value="${order.key.id}"
+                                    name="idOrder">Изменить
+                            </button>
+                        </form>
+                    </div>
+
+                </td>
+
+                <td>
+                    <div th:if="${order.key.state.name() == 'IN_SEARCH_COURIER'}">
+                        <form id="putCourierForm" th:action="@{/admin/assign-courier}" method="post">
+                            <input type="hidden" name="_method" value="PUT"/>
+                            <select id="idCourier" name="idCourier">
+                                <option th:each="courier : ${couriers}" th:value="${courier.id}"
+                                        th:text="${courier.nameOfCourier}"></option>
+                            </select>
+                            <button type="submit" th:value="${order.key.id}" id="idOrder" name="idOrder">Назначить
+                            </button>
+                        </form>
+
+                    </div>
+
+                    <p th:if="${order.key.courier != null}">
+                        Назначен курьер - <span th:text="${order.key.courier.nameOfCourier}"></span>
+                    </p>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+<script src="/js/admin.js"></script>
+
+</body>
+
+</html>

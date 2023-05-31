@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bag.css}"/>
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/userNavbar :: content"></div>
+
+<div class="cart-container">
+
+    <div class="cart">
+
+        <div class="select-wrapper">
+            <select id="currency" name="currency" onchange="updateProductsInBag()">
+                <option th:value="RUB">RUB</option>
+                <option th:value="USD">USD</option>
+                <option th:value="EUR">EUR</option>
+                <option th:value="GBP">GBP</option>
+            </select>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <h2>Корзина</h2>
+        <table class="cart-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <div class="cart-total">
+            <span>Итого:</span>
+            <span id="total-price">0</span>
+        </div>
+        <div class="buttons">
+
+            <form th:action="@{/order}" method="get">
+
+                <div class="switch-bonus">
+                    <h3>Ваши Додокоины: <span th:text="${bonuses}"></span></h3>
+                    <input type="checkbox" id="switch" name="useBonuses" th:value="true"/>
+                    <label for="switch"></label>
+                </div>
+
+                <button class="btn btn-secondary">Оформить заказ</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Додо Пицца</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/userNavbar :: content"></div>
+
+
+<p><span th:text="${message}"></span></p>
+
+<section class="about" id="about">
+
+    <div class="image">
+        <img th:src="@{/images/about.jpg}" alt="" src="">
+    </div>
+
+    <div class="content">
+        <h3 class="title">Сеть пиццерий № 1 в России</h3>
+        <p>Обычно люди приходят в Додо Пиццу, чтобы просто поесть. Но для нас Додо — не только пицца.
+            Это и пицца тоже, но в первую очередь это большое дело, которое вдохновляет нас,
+            заставляет каждое утро просыпаться и с интересом продолжать работу.</p>
+        <div class="icons-container">
+            <div class="icons">
+                <img th:src="@{/images/about-icon-1.jpg}" alt="" src="">
+                <h3>Вкусная еда</h3>
+            </div>
+            <div class="icons">
+                <img th:src="@{/images/about-icon-2.jpg}" alt="" src="">
+                <h3>Свежие продукты</h3>
+            </div>
+            <div class="icons">
+                <img th:src="@{/images/about-icon-3.jpg}" alt="" src="">
+                <h3>Лучшие повара</h3>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="meals" id="meals">
+
+    <div class="heading-cat" id="pizza">
+        <h3>Пицца</h3>
+
+    </div>
+
+    <div class="meal-container">
+
+        <div class="meal" th:each="product : ${productsWithCategory['Пицца']}">
+
+            <div class="op" th:attr="data-name='food-' + ${product.id}">
+                <img th:src="@{/file/__${product.photoName}__}" alt="" src="">
+                <h3><span th:text="${product.nameOfProduct}"></span></h3>
+                <div class="price"><span th:text="${product.price}"></span>₽</div>
+            </div>
+
+            <button id="bag" class="bag" th:attr="data-id=${product.id}" onclick="addToCart(this)">Добавить в корзину
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="heading-cat" id="snacks">
+        <h3>Закуски</h3>
+    </div>
+
+    <div class="meal-container">
+
+        <div class="meal" th:each="product : ${productsWithCategory['Закуски']}">
+
+            <div class="op" th:attr="data-name='food-' + ${product.id}">
+                <img th:src="@{/file/__${product.photoName}__}" alt="" src="">
+                <h3><span th:text="${product.nameOfProduct}"></span></h3>
+                <div class="price"><span th:text="${product.price}"></span>₽</div>
+            </div>
+
+            <button class="bag" th:attr="data-id=${product.id}" onclick="addToCart(this)">Добавить в корзину</button>
+
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="heading-cat" id="drinks">
+        <h3>Напитки</h3>
+    </div>
+
+    <div class="meal-container">
+
+        <div class="meal" th:each="product : ${productsWithCategory['Напитки']}">
+
+            <div class="op" th:attr="data-name='food-' + ${product.id}">
+                <img th:src="@{/file/__${product.photoName}__}" alt="" src="">
+                <h3><span th:text="${product.nameOfProduct}"></span></h3>
+                <div class="price"><span th:text="${product.price}"></span>₽</div>
+            </div>
+
+            <button class="bag" th:attr="data-id=${product.id}" onclick="addToCart(this)">Добавить в корзину</button>
+
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="heading-cat" id="desert">
+        <h3>Десерты</h3>
+    </div>
+
+    <div class="meal-container">
+
+        <div class="meal" th:each="product : ${productsWithCategory['Десерты']}">
+
+            <div class="op" th:attr="data-name='food-' + ${product.id}">
+                <img th:src="@{/file/__${product.photoName}__}" alt="" src="">
+                <h3><span th:text="${product.nameOfProduct}"></span></h3>
+                <div class="price"><span th:text="${product.price}"></span>₽</div>
+            </div>
+
+            <button class="bag" th:attr="data-id=${product.id}" onclick="addToCart(this)">Добавить в корзину</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="food-preview-container">
+
+    <div id="close-preview" class="fas fa-times">Закрыть</div>
+
+    <div th:each="product : ${allProducts}">
+        <div class="food-preview" th:attr="data-target='food-' + ${product.id}">
+            <img th:src="@{/file/__${product.photoName}__}" alt="" src="">
+            <h3><span th:text="${product.nameOfProduct}"></span></h3>
+            <p><span th:text="${product.description}"></span></p>
+            <p><span th:text="${product.price}"></span>₽</p>
+            <form th:action="@{/product/__${product.id}__}">
+                <button type="submit">Подробнее</button>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+<script src="/js/main.js"></script>
+<script src="/js/preview.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мониторинг заказов</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/profile.css}"/>
+</head>
+
+<body>
+
+<div class="include" th:include="/fragments/userNavbar :: content"></div>
+
+<section class="admin-product">
+    <h1></h1>
+</section>
+
+
+<script src="/js/main.js"></script>
+
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li><a href="/profile#personal">Личные данные</a></li>
+            <li><a href="/profile#current">Текущие заказы</a></li>
+            <li><a href="/profile#ended">История заказов</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+
+        <div class="personal" id="personal">
+
+            <section class="change-product">
+
+                <h1>Ваши данные</h1>
+
+                <div class="product-info">
+                    <div class="product-details">
+                        <p><strong class="product-label">Имя: </strong>
+                            <span th:text="${client.nameOfClient}"></span></p>
+                        <p><strong class="product-label">Номер телефона: </strong>
+                            <span th:text="${client.numberOfPhone}"></span></p>
+                        <p><strong class="product-label">Дата рождения: </strong>
+                            <span th:text="${client.dateOfBirth}"></span></p>
+                        <p><strong class="product-label">Бонусы: </strong>
+                            <span th:text="${client.bonuses}"></span></p>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="change-product">
+                <form method="post" th:action="@{/profile}" th:object="${requestClientForm}">
+                    <h2>Изменение ваших данных</h2>
+
+                    <div style="display: flex; align-items: center;">
+                        <label>
+                            <input type="text" name="nameOfClient" size="40" placeholder="Имя" id="nameOfClient"
+                                   th:value="${requestClientForm.nameOfClient}">
+                        </label>
+                        <span th:if="${#fields.hasErrors('nameOfClient')}" th:errors="*{nameOfClient}"
+                              style="margin-left: 10px; font-size: 15px"></span>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div style="display: flex; align-items: center;">
+                        <label>
+                            <input type="text" name="numberOfPhone" size="40" placeholder="Телефон" id="numberOfPhone"
+                                   th:value="${requestClientForm.numberOfPhone}">
+                        </label>
+                        <span th:if="${#fields.hasErrors('numberOfPhone')}" th:errors="*{numberOfPhone}"
+                              style="margin-left: 10px; font-size: 15px"></span>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div th:if="${client.dateOfBirth == null}" style="display: flex; align-items: center;">
+                        <label>
+                            <input type="date" name="dateOfBirth" size="40" placeholder="Дата рождения" id="dateOfBirth"
+                                   th:value="${requestClientForm.dateOfBirth}">
+                        </label>
+                        <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"
+                              style="margin-left: 10px; font-size: 15px"></span>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <input type="hidden" name="_method" value="PUT"/>
+
+                    <button type="submit" name="clientId" th:value="${client.id}">Изменить</button>
+                </form>
+            </section>
+
+        </div>
+
+
+        <div id="current">
+            <section>
+                <div class="order">
+                    <h2>Текущие заказы</h2>
+                    <table class="order-table">
+                        <thead>
+                        <tr>
+                            <th>Дата заказа</th>
+                            <th>Продукты</th>
+                            <th>Стоимость</th>
+                            <th>Адрес доставки</th>
+                            <th>Статус</th>
+                            <th>Курьер</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order : ${currentOrders}">
+                            <td><span th:text="${#temporals.format(order.key.date, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
+                            <td>
+                                <ul>
+                                    <li th:each="entity : ${order.value}"
+                                        th:text="${entity.product.nameOfProduct + ' x ' + entity.count}"></li>
+                                </ul>
+                            </td>
+                            <td><span th:text="${order.key.fullPrice}"></span></td>
+                            <td><span th:text="${order.key.address}"></span></td>
+
+                            <td>
+                                <p th:if="${order.key.state.name() == 'ACCEPTED'}">Принято</p>
+                                <p th:if="${order.key.state.name() == 'COOKING'}">Готовится</p>
+                                <p th:if="${order.key.state.name() == 'IN_SEARCH_COURIER'}">В поиске курьера</p>
+                            </td>
+
+                            <td th:if="${order.key.courier != null}">
+                                <span th:text="${order.key.courier.nameOfCourier}"></span></td>
+
+                            <td th:if="${order.key.courier == null}">
+                                <span>...</span></td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <div id="ended">
+            <section>
+                <div class="order">
+                    <h2>История заказов</h2>
+                    <table class="order-table">
+                        <thead>
+                        <tr>
+                            <th>Дата заказа</th>
+                            <th>Продукты</th>
+                            <th>Стоимость</th>
+                            <th>Адрес доставки</th>
+                            <th>Статус</th>
+                            <th>Курьер</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order : ${completedOrders}">
+                            <td><span th:text="${order.key.date}"></span></td>
+                            <td>
+                                <ul>
+                                    <li th:each="entity : ${order.value}"
+                                        th:text="${entity.product.nameOfProduct + ' x ' + entity.count}"></li>
+                                </ul>
+                            </td>
+                            <td><span th:text="${order.key.fullPrice}"></span></td>
+                            <td><span th:text="${order.key.address}"></span></td>
+
+                            <td>
+                                <p th:if="${order.key.state.name() == 'ACCEPTED'}">Принято</p>
+                                <p th:if="${order.key.state.name() == 'COOKING'}">Готовится</p>
+                                <p th:if="${order.key.state.name() == 'IN_SEARCH_COURIER'}">В поиске курьера</p>
+                            </td>
+
+                            <td><span th:text="${order.key.courier.nameOfCourier}"></span></td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>
